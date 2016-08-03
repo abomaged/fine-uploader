@@ -4,7 +4,7 @@ BUILD-OUT-DIR = _build
 DIST-OUT-DIR = _dist
 SRC-DIR = client
 JS-SRC-DIR = $(SRC-DIR)/js
-JS-3RDPARTY-SRC-DIR = $(SRC-DIR)/js
+JS-3RDPARTY-SRC-DIR = $(JS-SRC-DIR)/third-party
 TEST-DIR = test
 UNIT-TEST-DIR = $(TEST-DIR)/unit
 
@@ -103,6 +103,7 @@ TRADITIONAL-UI-JQUERY-FILES = \
 	$(TRADITIONAL-UI-FILES)
 
 S3-FILES-ONLY = \
+	$(CRYPTOJS-FILES) \
 	$(JS-SRC-DIR)/s3/util.js \
 	$(JS-SRC-DIR)/non-traditional-common/uploader.basic.api.js \
 	$(JS-SRC-DIR)/s3/uploader.basic.js \
@@ -344,3 +345,24 @@ build: \
 	build-all-ui-min \
 	build-all-ui-jquery \
 	build-all-ui-jquery-min
+
+start-test-resources-server: test-resources-server.PID
+
+start-root-server: root-server.PID
+
+test-resources-server.PID:
+	$(NPM-BIN)/static test/unit/resources -H '{"Access-Control-Allow-Origin": "*"}' -p 3000 & echo $$! > $@
+
+root-server.PID:
+	$(NPM-BIN)/static . -p 3001 & echo $$! > $@
+
+stop-test-resources-server: test-resources-server.PID
+	kill `cat $<` && rm $<
+
+stop-root-server: root-server.PID
+	kill `cat $<` && rm $<
+
+test: start-test-resources-server start-root-server build-all-ui
+	$(NPM-BIN)/karma start config/karma.conf.js
+	make stop-test-resources-server
+	make stop-root-server
