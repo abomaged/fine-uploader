@@ -200,112 +200,116 @@ lint:
 	$(NPM-BIN)/jscs $(JS-SRC-DIR)/*
 	$(NPM-BIN)/jshint $(JS-SRC-DIR)/* $(UNIT-TEST-DIR)/* $(TEST-DIR)/static/local/*
 
-build-dnd-standalone:
+_build:
+	mkdir $@
+
+
+build-dnd-standalone: _build
 	$(NPM-BIN)/uglifyjs $(DND-FILES) -o $(BUILD-OUT-DIR)/dnd.js -b -e window:global --source-map $(BUILD-OUT-DIR)/dnd.js.map -p relative
 
-build-dnd-standalone-min:
+build-dnd-standalone-min: _build
 	$(NPM-BIN)/uglifyjs $(DND-FILES) -o $(BUILD-OUT-DIR)/dnd.min.js -e window:global --source-map $(BUILD-OUT-DIR)/dnd.min.js.map -p relative
 
-build-dnd-standalone-jquery:
+build-dnd-standalone-jquery: _build
 	$(NPM-BIN)/uglifyjs $(DND-JQUERY-FILES) -o $(BUILD-OUT-DIR)/dnd.jquery.js -b -e window:global --source-map $(BUILD-OUT-DIR)/dnd.jquery.js.map -p relative
 
-build-dnd-standalone-jquery-min:
+build-dnd-standalone-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(DND-JQUERY-FILES) -o $(BUILD-OUT-DIR)/dnd.jquery.js -e window:global --source-map $(BUILD-OUT-DIR)/dnd.jquery.js.map -p relative
 
-build-core-traditional:
+build-core-traditional: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-FILES) -o $(BUILD-OUT-DIR)/core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/core.fine-uploader.js.map -p relative
 
-build-core-traditional-min:
+build-core-traditional-min: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-FILES) -o $(BUILD-OUT-DIR)/core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/core.fine-uploader.min.js.map -p relative
 
-build-core-traditional-jquery:
+build-core-traditional-jquery: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/core.jquery.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/core.jquery.fine-uploader.js.map -p relative
 
-build-core-traditional-jquery-min:
+build-core-traditional-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/core.jquery.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/core.jquery.fine-uploader.min.js.map -p relative
 
-build-ui-traditional:
+build-ui-traditional: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-UI-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/fine-uploader.js.map -p relative
 
-build-ui-traditional-min:
+build-ui-traditional-min: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-UI-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/fine-uploader.min.js.map -p relative
 
-build-ui-traditional-jquery:
+build-ui-traditional-jquery: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.jquery.js -b -e window:global --source-map $(BUILD-OUT-DIR)/jquery.fine-uploader.js.map -p relative
 
-build-ui-traditional-jquery-min:
+build-ui-traditional-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(TRADITIONAL-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.jquery.min.js -e window:global --source-map $(BUILD-OUT-DIR)/jquery.fine-uploader.min.js.map -p relative
 
-build-core-s3:
+build-core-s3: _build
 	$(NPM-BIN)/uglifyjs $(S3-FILES) -o $(BUILD-OUT-DIR)/s3.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.core.fine-uploader.js.map -p relative
 
-build-core-s3-min:
+build-core-s3-min: _build
 	$(NPM-BIN)/uglifyjs $(S3-FILES) -o $(BUILD-OUT-DIR)/s3.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.core.fine-uploader.min.js.map -p relative
 
-build-core-s3-jquery:
+build-core-s3-jquery: _build
 	$(NPM-BIN)/uglifyjs $(S3-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.js.map -p relative
 
-build-core-s3-jquery-min:
+build-core-s3-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(S3-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.min.js.map -p relative
 
-build-ui-s3:
+build-ui-s3: _build
 	$(NPM-BIN)/uglifyjs $(S3-UI-FILES) -o $(BUILD-OUT-DIR)/s3.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.fine-uploader.js.map -p relative
 
-build-ui-s3-min:
+build-ui-s3-min: _build
 	$(NPM-BIN)/uglifyjs $(S3-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.min.js.map -p relative
 
-build-ui-s3-jquery:
+build-ui-s3-jquery: _build
 	$(NPM-BIN)/uglifyjs $(S3-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.js.map -p relative
 
-build-ui-s3-jquery-min:
+build-ui-s3-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(S3-UI-FILES) -o $(BUILD-OUT-DIR)/s3.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.fine-uploader.min.js.map -p relative
 
-build-core-azure:
+build-core-azure: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-FILES) -o $(BUILD-OUT-DIR)/azure.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.core.fine-uploader.js.map -p relative
 
-build-core-azure-min:
+build-core-azure-min: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-FILES) -o $(BUILD-OUT-DIR)/azure.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.core.fine-uploader.min.js.map -p relative
 
-build-core-azure-jquery:
+build-core-azure-jquery: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.js.map -p relative
 
-build-core-azure-jquery-min:
+build-core-azure-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.min.js.map -p relative
 
-build-ui-azure:
+build-ui-azure: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-UI-FILES) -o $(BUILD-OUT-DIR)/azure.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.fine-uploader.js.map -p relative
 
-build-ui-azure-min:
+build-ui-azure-min: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-UI-FILES) -o $(BUILD-OUT-DIR)/azure.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.fine-uploader.min.js.map -p relative
 
-build-ui-azure-jquery:
+build-ui-azure-jquery: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.js.map -p relative
 
-build-ui-azure-jquery-min:
+build-ui-azure-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(AZURE-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.min.js.map -p relative
 
-build-all-core:
+build-all-core: _build
 	$(NPM-BIN)/uglifyjs $(ALL-CORE-FILES) -o $(BUILD-OUT-DIR)/all.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.core.fine-uploader.js.map -p relative
 
-build-all-core-min:
+build-all-core-min: _build
 	$(NPM-BIN)/uglifyjs $(ALL-CORE-FILES) -o $(BUILD-OUT-DIR)/all.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.core.fine-uploader.min.js.map -p relative
 
-build-all-core-jquery:
+build-all-core-jquery: _build
 	$(NPM-BIN)/uglifyjs $(ALL-CORE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.js.map -p relative
 
-build-all-core-jquery-min:
+build-all-core-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(ALL-CORE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.min.js.map -p relative
 
-build-all-ui:
+build-all-ui: _build
 	$(NPM-BIN)/uglifyjs $(ALL-FILES) -o $(BUILD-OUT-DIR)/all.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.fine-uploader.js.map -p relative
 
-build-all-ui-min:
+build-all-ui-min: _build
 	$(NPM-BIN)/uglifyjs $(ALL-FILES) -o $(BUILD-OUT-DIR)/all.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.fine-uploader.min.js.map -p relative
 
-build-all-ui-jquery:
+build-all-ui-jquery: _build
 	$(NPM-BIN)/uglifyjs $(ALL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.fine-uploader.js.map -p relative
 
-build-all-ui-jquery-min:
+build-all-ui-jquery-min: _build
 	$(NPM-BIN)/uglifyjs $(ALL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.fine-uploader.min.js.map -p relative
 
 build: \

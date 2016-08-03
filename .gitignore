@@ -20,7 +20,8 @@ master
 hardcopy*
 selenium.log*
 
-test-server.PID
+root-server.PID
+test-resources-server.PID
 
 fine-uploader/
 test/upload/*
