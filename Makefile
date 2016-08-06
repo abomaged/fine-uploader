@@ -202,7 +202,9 @@ lint:
 
 _build:
 	mkdir $@
-
+	cp -pR $(SRC-DIR)/placeholders $@
+	cp $(SRC-DIR)/*.css $@
+	cp $(SRC-DIR)/*.gif $@
 
 build-dnd-standalone: _build
 	$(NPM-BIN)/uglifyjs $(DND-FILES) -o $(BUILD-OUT-DIR)/dnd.js -b -e window:global --source-map $(BUILD-OUT-DIR)/dnd.js.map -p relative
