@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "async": "0.2.9",
+    "clean-css": "3.4.19",
     "fs-sync": "1.0.2",
     "glob": "3.2.6",
     "grunt": "^0.4.5",
@@ -50,7 +51,6 @@
     "grunt-contrib-compress": "0.5.2",
     "grunt-contrib-concat": "0.3.0",
     "grunt-contrib-copy": "0.4.1",
-    "grunt-contrib-cssmin": "0.6.1",
     "grunt-contrib-uglify": "0.2.2",
     "grunt-open": "0.2.2",
     "grunt-shell": "0.3.1",

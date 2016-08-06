@@ -1,3 +1,5 @@
+.PHONY: clean _build
+
 NPM-BIN = $(shell npm bin)
 
 BUILD-OUT-DIR = _build
@@ -201,10 +203,13 @@ lint:
 	$(NPM-BIN)/jshint $(JS-SRC-DIR)/* $(UNIT-TEST-DIR)/* $(TEST-DIR)/static/local/*
 
 _build:
-	mkdir $@
+	mkdir -p $@
 	cp -pR $(SRC-DIR)/placeholders $@
 	cp $(SRC-DIR)/*.css $@
 	cp $(SRC-DIR)/*.gif $@
+	$(NPM-BIN)/cleancss --source-map $@/fine-uploader.css -o $@/fine-uploader.min.css
+	$(NPM-BIN)/cleancss --source-map $@/fine-uploader-gallery.css -o $@/fine-uploader-gallery.min.css
+	$(NPM-BIN)/cleancss --source-map $@/fine-uploader-new.css -o $@/fine-uploader-new.min.css
 
 build-dnd-standalone: _build
 	$(NPM-BIN)/uglifyjs $(DND-FILES) -o $(BUILD-OUT-DIR)/dnd.js -b -e window:global --source-map $(BUILD-OUT-DIR)/dnd.js.map -p relative
