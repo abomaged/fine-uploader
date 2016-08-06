@@ -1,5 +1,7 @@
 .PHONY: clean _build
 
+VERSION=`node -pe "require('./package.json').version"`
+
 NPM-BIN = $(shell npm bin)
 
 BUILD-OUT-DIR = _build
@@ -205,6 +207,7 @@ lint:
 _build:
 	mkdir -p $@
 	cp -pR $(SRC-DIR)/placeholders $@
+	cp -pR $(SRC-DIR)/html/templates $@
 	cp $(SRC-DIR)/*.css $@
 	cp $(SRC-DIR)/*.gif $@
 	$(NPM-BIN)/cleancss --source-map $@/fine-uploader.css -o $@/fine-uploader.min.css
@@ -377,3 +380,14 @@ test: start-test-resources-server start-root-server build-all-ui
 	$(NPM-BIN)/karma start config/karma.conf.js
 	make stop-test-resources-server
 	make stop-root-server
+
+zip: zip-traditional zip-s3 zip-azure
+
+zip-traditional:
+	(cd $(BUILD-OUT-DIR) ; zip fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.* core.fine-uploader*.*)
+
+zip-s3:
+	(cd $(BUILD-OUT-DIR) ; zip s3.fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.css* s3*.*)
+
+zip-azure:
+	(cd $(BUILD-OUT-DIR) ; zip azure.fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.css* azure*.*)

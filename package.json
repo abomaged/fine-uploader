@@ -75,8 +75,8 @@
     "uuid": "1.4.1"
   },
   "scripts": {
-    "build": "grunt package",
-    "devbuild": "make clean; grunt dev",
+    "build": "make lint; make build",
+    "devbuild": "make clean; make build-all-ui",
     "lint": "make lint",
     "setup-dev": "(cd test/dev/handlers; curl -sS https://getcomposer.org/installer | php; php composer.phar install)",
     "start-local-dev": "(. test/dev/handlers/s3keys.sh; php -S 0.0.0.0:9090 -t . -c test/dev/handlers/php.ini)",
