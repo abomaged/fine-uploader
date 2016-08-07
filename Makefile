@@ -455,5 +455,14 @@ publish: \
 	copy-azure-jquery-dist \
 	copy-all-dist \
 	copy-all-jquery-dist \
-#	tag-release \
-#	push-to-npm
+	tag-release \
+	push-to-npm
+
+setup-dev:
+	(cd test/dev/handlers; curl -sS https://getcomposer.org/installer | php; php composer.phar install)
+
+start-local-dev:
+	(. test/dev/handlers/s3keys.sh; php -S 0.0.0.0:9090 -t . -c test/dev/handlers/php.ini)
+
+update-dev:
+	(cd test/dev/handlers; php composer.phar update)
