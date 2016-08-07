@@ -35,6 +35,12 @@
     "url": "git://github.com/FineUploader/fine-uploader.git"
   },
   "author": "Widen Enterprises, Inc.",
+  "contributors": [
+    {
+      "name": "Ray Nicholus",
+      "url": "http://raynicholus.com"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/FineUploader/fine-uploader/issues"
