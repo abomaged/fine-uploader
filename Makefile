@@ -1,11 +1,12 @@
-.PHONY: clean _build
+.PHONY: clean _build publish
 
-VERSION=`node -pe "require('./package.json').version"`
+VERSION=$(shell node -pe "require('./package.json').version")
+DIST-OUT-DIR = _dist
+PUB-DIR = $(DIST-OUT-DIR)/$(VERSION)
 
 NPM-BIN = $(shell npm bin)
 
 BUILD-OUT-DIR = _build
-DIST-OUT-DIR = _dist
 SRC-DIR = client
 JS-SRC-DIR = $(SRC-DIR)/js
 JS-3RDPARTY-SRC-DIR = $(JS-SRC-DIR)/third-party
@@ -229,16 +230,16 @@ build-dnd-standalone-jquery-min: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(DND-JQUERY-FILES) -o $(BUILD-OUT-DIR)/dnd.jquery.js -e window:global --source-map $(BUILD-OUT-DIR)/dnd.jquery.js.map -p relative
 
 build-core-traditional: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-FILES) -o $(BUILD-OUT-DIR)/core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/fine-uploader.core.js.map -p relative
 
 build-core-traditional-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-FILES) -o $(BUILD-OUT-DIR)/core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/fine-uploader.core.min.js.map -p relative
 
 build-core-traditional-jquery: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/core.jquery.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/core.jquery.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/jquery.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/jquery.fine-uploader.core.js.map -p relative
 
 build-core-traditional-jquery-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/core.jquery.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/core.jquery.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-JQUERY-FILES) -o $(BUILD-OUT-DIR)/jquery.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/jquery.fine-uploader.core.min.js.map -p relative
 
 build-ui-traditional: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-UI-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/fine-uploader.js.map -p relative
@@ -253,16 +254,16 @@ build-ui-traditional-jquery-min: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(TRADITIONAL-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/fine-uploader.jquery.min.js -e window:global --source-map $(BUILD-OUT-DIR)/jquery.fine-uploader.min.js.map -p relative
 
 build-core-s3: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-FILES) -o $(BUILD-OUT-DIR)/s3.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-FILES) -o $(BUILD-OUT-DIR)/s3.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.fine-uploader.core.js.map -p relative
 
 build-core-s3-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-FILES) -o $(BUILD-OUT-DIR)/s3.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-FILES) -o $(BUILD-OUT-DIR)/s3.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.fine-uploader.core.min.js.map -p relative
 
 build-core-s3-jquery: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.core.js.map -p relative
 
 build-core-s3-jquery-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-JQUERY-FILES) -o $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.jquery.fine-uploader.core.min.js.map -p relative
 
 build-ui-s3: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-UI-FILES) -o $(BUILD-OUT-DIR)/s3.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/s3.fine-uploader.js.map -p relative
@@ -277,16 +278,16 @@ build-ui-s3-jquery-min: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(S3-UI-FILES) -o $(BUILD-OUT-DIR)/s3.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/s3.fine-uploader.min.js.map -p relative
 
 build-core-azure: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-FILES) -o $(BUILD-OUT-DIR)/azure.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-FILES) -o $(BUILD-OUT-DIR)/azure.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.fine-uploader.core.js.map -p relative
 
 build-core-azure-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-FILES) -o $(BUILD-OUT-DIR)/azure.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-FILES) -o $(BUILD-OUT-DIR)/azure.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.fine-uploader.core.min.js.map -p relative
 
 build-core-azure-jquery: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.core.js.map -p relative
 
 build-core-azure-jquery-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.core.min.js.map -p relative
 
 build-ui-azure: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-UI-FILES) -o $(BUILD-OUT-DIR)/azure.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/azure.fine-uploader.js.map -p relative
@@ -301,16 +302,16 @@ build-ui-azure-jquery-min: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(AZURE-UI-JQUERY-FILES) -o $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/azure.jquery.fine-uploader.min.js.map -p relative
 
 build-all-core: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-CORE-FILES) -o $(BUILD-OUT-DIR)/all.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-CORE-FILES) -o $(BUILD-OUT-DIR)/all.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.fine-uploader.core.js.map -p relative
 
 build-all-core-min: _build
-	$(NPM-BIN)/uglifyjs $(ALL-CORE-FILES) -o $(BUILD-OUT-DIR)/all.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs $(ALL-CORE-FILES) -o $(BUILD-OUT-DIR)/all.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.fine-uploader.core.min.js.map -p relative
 
 build-all-core-jquery: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-CORE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-CORE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.fine-uploader.core.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.fine-uploader.core.js.map -p relative
 
 build-all-core-jquery-min: _build
-	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-CORE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.core.fine-uploader.min.js.map -p relative
+	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-CORE-JQUERY-FILES) -o $(BUILD-OUT-DIR)/all.jquery.fine-uploader.core.min.js -e window:global --source-map $(BUILD-OUT-DIR)/all.jquery.fine-uploader.core.min.js.map -p relative
 
 build-all-ui: _build
 	$(NPM-BIN)/uglifyjs --preamble $(PREAMBLE) $(ALL-FILES) -o $(BUILD-OUT-DIR)/all.fine-uploader.js -b -e window:global --source-map $(BUILD-OUT-DIR)/all.fine-uploader.js.map -p relative
@@ -386,10 +387,73 @@ test: start-test-resources-server start-root-server build-all-ui
 zip: zip-traditional zip-s3 zip-azure
 
 zip-traditional:
-	(cd $(BUILD-OUT-DIR) ; zip fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.* core.fine-uploader*.*)
+	(cd $(BUILD-OUT-DIR) ; zip fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.* fine-uploader.core*.*)
 
 zip-s3:
 	(cd $(BUILD-OUT-DIR) ; zip s3.fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.css* s3*.*)
 
 zip-azure:
 	(cd $(BUILD-OUT-DIR) ; zip azure.fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.css* azure*.*)
+
+zip-all:
+	(cd $(BUILD-OUT-DIR) ; zip all.fine-uploader.zip placeholders/* templates/* *.gif fine-uploader*.css* all*.*)
+
+setup-dist:
+	mkdir -p $(PUB-DIR)
+	cp LICENSE README.md package.json $(PUB-DIR)
+	cp -pR $(SRC-DIR)/commonjs/ $(PUB-DIR)/lib/
+
+copy-build-to-dist:
+	mkdir -p $(PUB-DIR)/$(PUB-SUBDIR)
+	cp -pR $(BUILD-OUT-DIR)/placeholders $(BUILD-OUT-DIR)/templates $(PUB-DIR)/$(PUB-SUBDIR)
+	cp $(BUILD-OUT-DIR)/*.gif $(PUB-DIR)/$(PUB-SUBDIR)
+	cp $(BUILD-OUT-DIR)/$(PUB-SUBDIR).core.min* $(BUILD-OUT-DIR)/$(PUB-SUBDIR).core.js* $(PUB-DIR)/$(PUB-SUBDIR)/
+	cp $(BUILD-OUT-DIR)/$(PUB-SUBDIR).min* $(BUILD-OUT-DIR)/$(PUB-SUBDIR).js* $(PUB-DIR)/$(PUB-SUBDIR)
+	cp $(BUILD-OUT-DIR)/fine-uploader*.css* $(PUB-DIR)/$(PUB-SUBDIR)
+
+
+copy-traditional-dist: PUB-SUBDIR=fine-uploader
+copy-traditional-dist: copy-build-to-dist
+	cp $(JS-SRC-DIR)/iframe.xss.response.js $(PUB-DIR)/fine-uploader
+
+copy-traditional-jquery-dist: PUB-SUBDIR=jquery.fine-uploader
+copy-traditional-jquery-dist: copy-build-to-dist
+	cp $(JS-SRC-DIR)/iframe.xss.response.js $(PUB-DIR)/jquery.fine-uploader
+
+copy-s3-dist: PUB-SUBDIR=s3.fine-uploader
+copy-s3-dist: copy-build-to-dist
+
+copy-s3-jquery-dist: PUB-SUBDIR=s3.jquery.fine-uploader
+copy-s3-jquery-dist: copy-build-to-dist
+
+copy-azure-dist: PUB-SUBDIR=azure.fine-uploader
+copy-azure-dist: copy-build-to-dist
+
+copy-azure-jquery-dist: PUB-SUBDIR=azure.jquery.fine-uploader
+copy-azure-jquery-dist: copy-build-to-dist
+
+copy-all-dist: PUB-SUBDIR=all.fine-uploader
+copy-all-dist: copy-build-to-dist
+
+copy-all-jquery-dist: PUB-SUBDIR=all.jquery.fine-uploader
+copy-all-jquery-dist: copy-build-to-dist
+
+tag-release:
+	git tag $(VERSION)
+	git push origin $(VERSION)
+
+push-to-npm:
+	(cd $(PUB-DIR) ; npm publish)
+
+publish: \
+	setup-dist \
+	copy-traditional-dist \
+	copy-traditional-jquery-dist \
+	copy-s3-dist \
+	copy-s3-jquery-dist \
+	copy-azure-dist \
+	copy-azure-jquery-dist \
+	copy-all-dist \
+	copy-all-jquery-dist \
+#	tag-release \
+#	push-to-npm
