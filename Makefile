@@ -466,3 +466,7 @@ start-local-dev:
 
 update-dev:
 	(cd test/dev/handlers; php composer.phar update)
+
+rev-version:
+	sed -i "" -e 's/$(VERSION)/$(target)/g' client/js/version.js
+	sed -i "" -e 's/$(VERSION)/$(target)/g' package.json
