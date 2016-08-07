@@ -412,31 +412,31 @@ copy-build-to-dist:
 	cp $(BUILD-OUT-DIR)/fine-uploader*.css* $(PUB-DIR)/$(PUB-SUBDIR)
 
 
-copy-traditional-dist: PUB-SUBDIR=fine-uploader
-copy-traditional-dist: copy-build-to-dist
+copy-traditional-dist:
+	make copy-build-to-dist PUB-SUBDIR=fine-uploader
 	cp $(JS-SRC-DIR)/iframe.xss.response.js $(PUB-DIR)/fine-uploader
 
-copy-traditional-jquery-dist: PUB-SUBDIR=jquery.fine-uploader
-copy-traditional-jquery-dist: copy-build-to-dist
+copy-traditional-jquery-dist:
+	make copy-build-to-dist PUB-SUBDIR=jquery.fine-uploader
 	cp $(JS-SRC-DIR)/iframe.xss.response.js $(PUB-DIR)/jquery.fine-uploader
 
-copy-s3-dist: PUB-SUBDIR=s3.fine-uploader
-copy-s3-dist: copy-build-to-dist
+copy-s3-dist:
+	make copy-build-to-dist PUB-SUBDIR=s3.fine-uploader
 
-copy-s3-jquery-dist: PUB-SUBDIR=s3.jquery.fine-uploader
-copy-s3-jquery-dist: copy-build-to-dist
+copy-s3-jquery-dist:
+	make copy-build-to-dist PUB-SUBDIR=s3.jquery.fine-uploader
 
-copy-azure-dist: PUB-SUBDIR=azure.fine-uploader
-copy-azure-dist: copy-build-to-dist
+copy-azure-dist:
+	make copy-build-to-dist PUB-SUBDIR=azure.fine-uploader
 
-copy-azure-jquery-dist: PUB-SUBDIR=azure.jquery.fine-uploader
-copy-azure-jquery-dist: copy-build-to-dist
+copy-azure-jquery-dist:
+	make copy-build-to-dist PUB-SUBDIR=azure.jquery.fine-uploader
 
-copy-all-dist: PUB-SUBDIR=all.fine-uploader
-copy-all-dist: copy-build-to-dist
+copy-all-dist:
+	make copy-build-to-dist PUB-SUBDIR=all.fine-uploader
 
-copy-all-jquery-dist: PUB-SUBDIR=all.jquery.fine-uploader
-copy-all-jquery-dist: copy-build-to-dist
+copy-all-jquery-dist:
+	make copy-build-to-dist PUB-SUBDIR=all.jquery.fine-uploader
 
 tag-release:
 	git tag $(VERSION)
